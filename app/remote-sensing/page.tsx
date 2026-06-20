@@ -1,5 +1,14 @@
 import BubblyHeader from "@/components/BubblyHeader";
 import CartoonCard from "@/components/CartoonCard";
+import InteractiveMap from "@/components/InteractiveMap";
+
+// Real corridor sites to pin on the satellite view.
+const CORRIDOR_SITES = [
+  { lat: 34.1971, lng: -118.1712, title: "Hahamongna Headwaters" },
+  { lat: 34.1389, lng: -118.1654, title: "Lower Arroyo Seco" },
+  { lat: 34.11, lng: -118.179, title: "South Pasadena Reach" },
+  { lat: 34.085, lng: -118.208, title: "Confluence" },
+];
 
 export default function RemoteSensing() {
   return (
@@ -43,25 +52,25 @@ export default function RemoteSensing() {
         <div className="w-full max-w-xl rounded-[2rem] border-4 border-ink bg-[#d9cdb0] p-6 shadow-bouncy-lg">
           {/* Screen bezel */}
           <div className="rounded-2xl border-4 border-ink bg-[#2b2b2b] p-3">
-            {/* The "screen" itself */}
-            <div className="relative aspect-[4/3] overflow-hidden rounded-lg border-2 border-ink bg-gradient-to-br from-[#0b3d2e] via-[#0e5c3f] to-[#1b7a4b]">
-              {/* Scanline overlay for the retro CRT feel */}
+            {/* The "screen" itself — a real satellite map of the corridor */}
+            <div className="relative overflow-hidden rounded-lg border-2 border-ink">
+              <InteractiveMap
+                framed={false}
+                tile="satellite"
+                height={300}
+                zoom={13}
+                scrollWheelZoom={false}
+                center={{ lat: 34.14, lng: -118.18 }}
+                markers={CORRIDOR_SITES}
+              />
+              {/* Scanline overlay for the retro CRT feel — sits above the map */}
               <div
-                className="pointer-events-none absolute inset-0 opacity-20"
+                className="pointer-events-none absolute inset-0 z-[1000] opacity-20"
                 style={{
                   backgroundImage:
                     "repeating-linear-gradient(to bottom, #000 0px, #000 1px, transparent 1px, transparent 4px)",
                 }}
               />
-              <div className="flex h-full w-full items-center justify-center text-center">
-                <span className="px-4 font-heading text-lg text-[#9dffd0]">
-                  [ Satellite Data Placeholder ]
-                  <br />
-                  <span className="text-sm font-normal">
-                    NDVI / canopy imagery loads here
-                  </span>
-                </span>
-              </div>
             </div>
           </div>
 
@@ -80,8 +89,9 @@ export default function RemoteSensing() {
         <div className="h-3 w-40 rounded-full border-4 border-ink bg-[#d9cdb0]" />
 
         <figcaption className="max-w-prose text-center text-base">
-          Swap in real satellite imagery (e.g. tree-canopy or NDVI vegetation
-          layers) once the ARSET analysis is exported.
+          Live satellite view of the Arroyo Seco corridor (Esri World Imagery),
+          pinned with the study sites. Swap in NDVI / tree-canopy layers once
+          the ARSET analysis is exported.
         </figcaption>
       </figure>
     </main>

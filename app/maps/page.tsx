@@ -58,8 +58,10 @@ function MapCard({
       <h2 className="text-2xl sm:text-3xl">{title}</h2>
       <p className="mt-2 text-base">{subtitle}</p>
 
-      {/* Map viewport — fixed height so Leaflet has dimensions to fill. */}
-      <div className="mt-6 h-72 flex-1 overflow-hidden rounded-xl border-4 border-ink">
+      {/* Map viewport — InteractiveMap pins its own pixel height; we just
+          supply the bordered, corner-clipping frame. (A flex-1/h-72 combo here
+          collapsed the height and made the map render blank.) */}
+      <div className="mt-6 overflow-hidden rounded-xl border-4 border-ink">
         {children}
       </div>
     </div>
@@ -109,13 +111,13 @@ export default function MapsPage() {
           title="Map 1: Study Area and Fieldwork Sites"
           subtitle="Shows selected fieldwork/restoration sites."
         >
-          <InteractiveMap {...toMapProps(map1Data)} framed={false} />
+          <InteractiveMap {...toMapProps(map1Data)} framed={false} height={340} />
         </MapCard>
         <MapCard
           title="Map 2: Tree Canopy and Shade Conditions"
           subtitle="Shows how sites relate to tree canopy/shade areas."
         >
-          <InteractiveMap {...toMapProps(map2Data)} framed={false} />
+          <InteractiveMap {...toMapProps(map2Data)} framed={false} height={340} />
         </MapCard>
 
         {/* Maps 3 & 4 — coming later */}

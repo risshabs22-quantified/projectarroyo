@@ -1,5 +1,6 @@
 import BubblyHeader from "@/components/BubblyHeader";
 import CartoonCard from "@/components/CartoonCard";
+import InteractiveMap from "@/components/InteractiveMap";
 
 export default function Home() {
   return (
@@ -10,6 +11,19 @@ export default function Home() {
           Native Plant Restoration Mapping
         </p>
       </header>
+
+      {/* Hero map of the Arroyo Seco corridor with the study sites pinned. */}
+      <InteractiveMap
+        height={360}
+        zoom={12}
+        center={{ lat: 34.14, lng: -118.18 }}
+        markers={[
+          { lat: 34.1971, lng: -118.1712, title: "Hahamongna Headwaters" },
+          { lat: 34.1389, lng: -118.1654, title: "Lower Arroyo Seco" },
+          { lat: 34.11, lng: -118.179, title: "South Pasadena Reach" },
+          { lat: 34.085, lng: -118.208, title: "Confluence" },
+        ]}
+      />
 
       <CartoonCard roomy className="flex flex-col gap-3">
         <h2 className="text-2xl">Project Context</h2>

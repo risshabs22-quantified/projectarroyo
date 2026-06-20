@@ -32,27 +32,58 @@ const bouncyPin = L.divIcon({
   popupAnchor: [0, -14], // float the popup just above the dot
 });
 
-import type { MapMarker } from "./InteractiveMap";
+import type { MapMarker, TileStyle } from "./InteractiveMap";
+
+// Tile sources — both free and key-less.
+const TILES: Record<TileStyle, { url: string; attribution: string }> = {
+  osm: {
+    url: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+    attribution:
+      '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+  },
+  satellite: {
+    // Esri World Imagery — {z}/{y}/{x} order.
+    url: "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+    attribution:
+      'Imagery &copy; <a href="https://www.esri.com/">Esri</a>, Maxar, Earthstar Geographics',
+  },
+};
 
 type MapViewProps = {
   center: { lat: number; lng: number };
   zoom: number;
   markers: MapMarker[];
+  tile?: TileStyle;
+  scrollWheelZoom?: boolean;
 };
 
 /**
  * MapView — the raw Leaflet map. Rendered client-only via next/dynamic from
  * InteractiveMap, so the `window`-dependent Leaflet code never hits SSR.
  */
-export function MapView({ center, zoom, markers }: MapViewProps) {
+export function MapView({
+  center,
+  zoom,
+  markers,
+  tile = "osm",
+  scrollWheelZoom = true,
+}: MapViewProps) {
+  const tiles = TILES[tile];
+
   return (
-    <MapContainer center={center} zoom={zoom} scrollWheelZoom className="h-full w-full">
-      <TileLayer
-        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-      />
+    <MapContainer
+      center={center}
+      zoom={zoom}
+      scrollWheelZoom={scrollWheelZoom}
+      className="h-full w-full"
+    >
+      <TileLayer attribution={tiles.attribution} url={tiles.url} />
       {markers.map((m, i) => (
-        <Marker key={`${m.lat},${m.lng},${i}`} position={{ lat: m.lat, lng: m.lng }} icon={bouncyPin}>
+        <Marker
+          key={`${m.lat},${m.lng},${i}`}
+          position={{ lat: m.lat, lng: m.lng }}
+          icon={bouncyPin}
+        >
           <Popup>
             <span className="font-sans font-bold">{m.title}</span>
           </Popup>

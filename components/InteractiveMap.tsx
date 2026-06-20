@@ -9,6 +9,9 @@ export type MapMarker = {
   title: string;
 };
 
+/** Tile background style: street map (OSM) or satellite imagery (Esri). */
+export type TileStyle = "osm" | "satellite";
+
 export type InteractiveMapProps = {
   /** Map center, e.g. { lat: 34.12, lng: -118.18 }. */
   center: { lat: number; lng: number };
@@ -16,14 +19,18 @@ export type InteractiveMapProps = {
   zoom?: number;
   /** Pins to drop on the map. */
   markers?: MapMarker[];
-  /** Height of the map area (number = px). Defaults to 480. Ignored when `framed` is false. */
+  /** Height of the map area (number = px). Defaults to 480. Always applied. */
   height?: number | string;
   /**
    * Wrap the map in the bouncy CartoonCard frame. Defaults to true.
-   * Set false when the parent already supplies a sized, bordered viewport
-   * (e.g. the Maps page) so the map just fills it — avoids a double frame.
+   * Set false when the parent already supplies a bordered viewport so we
+   * don't double-frame — the map still keeps its own pinned height.
    */
   framed?: boolean;
+  /** Tile style — "osm" (default) or "satellite". */
+  tile?: TileStyle;
+  /** Allow mouse-wheel zoom. Defaults to true; set false for thumbnails. */
+  scrollWheelZoom?: boolean;
   /** Extra classes forwarded to the wrapper. */
   className?: string;
 };
@@ -40,12 +47,13 @@ const MapView = dynamic(() => import("./MapView").then((m) => m.MapView), {
 });
 
 /**
- * InteractiveMap — an OpenStreetMap-backed Leaflet map wrapped in the
- * cartoon-brutalist CartoonCard frame (4px black border, rounded-2xl,
- * shadow-bouncy). The map fills the card edge-to-edge.
+ * InteractiveMap — a Leaflet map (OSM or satellite tiles) wrapped, by default,
+ * in the cartoon-brutalist CartoonCard frame.
  *
  * Safe to drop into any page (server or client) — the Leaflet internals are
- * lazy-loaded on the client only.
+ * lazy-loaded on the client only. The map ALWAYS gets a definite pixel height
+ * (Leaflet renders blank without one), so it never collapses inside flex
+ * layouts.
  */
 export function InteractiveMap({
   center,
@@ -53,24 +61,36 @@ export function InteractiveMap({
   markers = [],
   height = 480,
   framed = true,
+  tile = "osm",
+  scrollWheelZoom = true,
   className = "",
 }: InteractiveMapProps) {
-  const map = <MapView center={center} zoom={zoom} markers={markers} />;
+  const resolvedHeight = typeof height === "number" ? `${height}px` : height;
 
-  // Unframed: fill the parent's sized/bordered viewport (parent owns the frame).
+  // Pin an explicit height here — never rely on a %/flex height chain, which
+  // is what makes Leaflet maps show up blank.
+  const map = (
+    <div style={{ height: resolvedHeight }} className="w-full">
+      <MapView
+        center={center}
+        zoom={zoom}
+        markers={markers}
+        tile={tile}
+        scrollWheelZoom={scrollWheelZoom}
+      />
+    </div>
+  );
+
+  // Unframed: the parent supplies the border/rounding; we keep the height.
   if (!framed) {
-    return <div className={`h-full w-full ${className}`}>{map}</div>;
+    return <div className={className}>{map}</div>;
   }
 
-  // Framed (default): wrap in the bouncy CartoonCard at a fixed height.
-  // `!p-0` strips CartoonCard's default padding so the map reaches the border;
-  // `overflow-hidden` clips the square map corners to rounded-2xl.
-  const resolvedHeight = typeof height === "number" ? `${height}px` : height;
+  // Framed (default): bouncy CartoonCard frame, map edge-to-edge.
+  // `!p-0` strips the default padding; `overflow-hidden` clips map corners.
   return (
     <CartoonCard className={`!p-0 overflow-hidden ${className}`}>
-      <div style={{ height: resolvedHeight }} className="w-full">
-        {map}
-      </div>
+      {map}
     </CartoonCard>
   );
 }
