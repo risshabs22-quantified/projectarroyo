@@ -16,9 +16,15 @@ export type InteractiveMapProps = {
   zoom?: number;
   /** Pins to drop on the map. */
   markers?: MapMarker[];
-  /** Height of the map area (number = px). Defaults to 480. */
+  /** Height of the map area (number = px). Defaults to 480. Ignored when `framed` is false. */
   height?: number | string;
-  /** Extra classes forwarded to the wrapping CartoonCard. */
+  /**
+   * Wrap the map in the bouncy CartoonCard frame. Defaults to true.
+   * Set false when the parent already supplies a sized, bordered viewport
+   * (e.g. the Maps page) so the map just fills it — avoids a double frame.
+   */
+  framed?: boolean;
+  /** Extra classes forwarded to the wrapper. */
   className?: string;
 };
 
@@ -46,16 +52,24 @@ export function InteractiveMap({
   zoom = 13,
   markers = [],
   height = 480,
+  framed = true,
   className = "",
 }: InteractiveMapProps) {
-  const resolvedHeight = typeof height === "number" ? `${height}px` : height;
+  const map = <MapView center={center} zoom={zoom} markers={markers} />;
 
+  // Unframed: fill the parent's sized/bordered viewport (parent owns the frame).
+  if (!framed) {
+    return <div className={`h-full w-full ${className}`}>{map}</div>;
+  }
+
+  // Framed (default): wrap in the bouncy CartoonCard at a fixed height.
+  // `!p-0` strips CartoonCard's default padding so the map reaches the border;
+  // `overflow-hidden` clips the square map corners to rounded-2xl.
+  const resolvedHeight = typeof height === "number" ? `${height}px` : height;
   return (
-    // `!p-0` strips CartoonCard's default padding so the map reaches the
-    // border; `overflow-hidden` clips the square map corners to rounded-2xl.
     <CartoonCard className={`!p-0 overflow-hidden ${className}`}>
       <div style={{ height: resolvedHeight }} className="w-full">
-        <MapView center={center} zoom={zoom} markers={markers} />
+        {map}
       </div>
     </CartoonCard>
   );

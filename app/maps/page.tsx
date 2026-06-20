@@ -109,13 +109,13 @@ export default function MapsPage() {
           title="Map 1: Study Area and Fieldwork Sites"
           subtitle="Shows selected fieldwork/restoration sites."
         >
-          <InteractiveMap {...toMapProps(map1Data)} />
+          <InteractiveMap {...toMapProps(map1Data)} framed={false} />
         </MapCard>
         <MapCard
           title="Map 2: Tree Canopy and Shade Conditions"
           subtitle="Shows how sites relate to tree canopy/shade areas."
         >
-          <InteractiveMap {...toMapProps(map2Data)} />
+          <InteractiveMap {...toMapProps(map2Data)} framed={false} />
         </MapCard>
 
         {/* Maps 3 & 4 — coming later */}
