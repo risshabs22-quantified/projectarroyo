@@ -9,8 +9,11 @@
   }
 
   body {
-    /* Warm, notebook-paper cream background + black ink text */
+    /* Warm, notebook-paper cream background + black ink text.
+       overflow-x-hidden stops the playful -rotate-1/rotate-1 headers and
+       bouncy shadows from triggering a horizontal scrollbar on phones. */
     @apply bg-paper text-ink font-sans antialiased;
+    overflow-x: hidden;
   }
 
   h1,
@@ -62,6 +65,13 @@
  * ------------------------------------------------------------------------- */
 .leaflet-tile {
   filter: contrast(120%) saturate(200%) brightness(95%);
+}
+
+/* Isolate each map's stacking context so Leaflet's internal high z-indexes
+ * (panes, controls, popups) can't render on top of the sticky navbar / mobile
+ * menu. Without this the maps bleed over the dropdown. */
+.leaflet-container {
+  z-index: 0;
 }
 
 /* Strip the default white box from our custom divIcon markers so only the

@@ -129,6 +129,15 @@ export default function MapsPage() {
           title="Map 4: Native Plant Restoration Priority Map"
           subtitle="Coming later. Final map ranking sites as high, medium, or low priority."
         />
+
+        {/* Optional Map 5 — added only if enough wildlife / iNaturalist data
+            is collected (claude1.md, section 3). Spans full width. */}
+        <div className="md:col-span-2">
+          <UnderConstructionCard
+            title="Map 5 (Optional): Biodiversity and Wildlife Observations"
+            subtitle="Optional. Added if enough wildlife or iNaturalist observations are collected."
+          />
+        </div>
       </div>
     </main>
   );

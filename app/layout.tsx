@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Fredoka, Nunito } from "next/font/google";
 import { Navbar } from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -55,6 +55,13 @@ export const metadata: Metadata = {
     description:
       "Mapping native plant restoration priorities across the Arroyo Seco corridor with QGIS, NASA ARSET, and field science.",
   },
+};
+
+// Explicit mobile viewport + cream theme color for the phone browser chrome.
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  themeColor: "#FFF9E6",
 };
 
 export default function RootLayout({

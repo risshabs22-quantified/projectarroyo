@@ -37,7 +37,7 @@ export function Navbar() {
   }, [pathname]);
 
   return (
-    <header className="sticky top-0 z-50 border-b-4 border-ink bg-paper">
+    <header className="sticky top-0 z-[1000] border-b-4 border-ink bg-paper">
       <nav className="mx-auto flex max-w-6xl items-center justify-between gap-x-6 px-6 py-4">
         <Link
           href="/"

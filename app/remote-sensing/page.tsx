@@ -65,7 +65,7 @@ export default function RemoteSensing() {
               />
               {/* Scanline overlay for the retro CRT feel — sits above the map */}
               <div
-                className="pointer-events-none absolute inset-0 z-[1000] opacity-20"
+                className="pointer-events-none absolute inset-0 z-10 opacity-20"
                 style={{
                   backgroundImage:
                     "repeating-linear-gradient(to bottom, #000 0px, #000 1px, transparent 1px, transparent 4px)",

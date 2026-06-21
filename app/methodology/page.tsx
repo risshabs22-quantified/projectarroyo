@@ -46,10 +46,10 @@ export default function Methodology() {
           <table className="w-full border-collapse text-left">
             <thead>
               <tr className="bg-ink text-paper">
-                <th className="border-2 border-ink px-5 py-3 font-heading text-xl">
+                <th className="border-2 border-ink px-3 py-3 sm:px-5 font-heading text-xl">
                   Category
                 </th>
-                <th className="w-28 border-2 border-ink px-5 py-3 text-center font-heading text-xl">
+                <th className="w-28 border-2 border-ink px-3 py-3 sm:px-5 text-center font-heading text-xl">
                   Points
                 </th>
               </tr>
@@ -57,19 +57,19 @@ export default function Methodology() {
             <tbody>
               {SCORING_ROWS.map((row) => (
                 <tr key={row.category} className="odd:bg-paper even:bg-white">
-                  <td className="border-2 border-ink px-5 py-3 text-lg">
+                  <td className="border-2 border-ink px-3 py-3 sm:px-5 text-lg">
                     {row.category}
                   </td>
-                  <td className="border-2 border-ink px-5 py-3 text-center font-heading text-lg">
+                  <td className="border-2 border-ink px-3 py-3 sm:px-5 text-center font-heading text-lg">
                     {row.points}
                   </td>
                 </tr>
               ))}
               <tr className="bg-ink text-paper">
-                <td className="border-2 border-ink px-5 py-3 font-heading text-xl">
+                <td className="border-2 border-ink px-3 py-3 sm:px-5 font-heading text-xl">
                   Total Score
                 </td>
-                <td className="border-2 border-ink px-5 py-3 text-center font-heading text-xl">
+                <td className="border-2 border-ink px-3 py-3 sm:px-5 text-center font-heading text-xl">
                   0–10
                 </td>
               </tr>
