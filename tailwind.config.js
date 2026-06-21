@@ -7,40 +7,41 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        // 8-bit retro arcade palette
-        paper: "#FFFFF0", // stark off-white (old monitor / terminal background)
-        ink: "#000000", // primary text / hard pixel shadows & borders
+        // Bouncy Cartoon Brutalist palette
+        paper: "#FFF9E6", // warm, notebook-paper cream background
+        ink: "#000000", // primary text / hard shadows & borders
       },
       fontFamily: {
-        // Readable terminal pixel font — used everywhere. The chunky arcade
-        // font (Press Start 2P) is reserved for h1/h2 page titles via
-        // globals.css, since it's too wide for nav links / buttons / labels.
-        heading: ["var(--font-vt323)", "ui-monospace", "monospace"],
-        sans: ["var(--font-vt323)", "ui-monospace", "monospace"],
+        // Chunky, bubbly headers
+        heading: ["var(--font-fredoka)", "ui-sans-serif", "system-ui", "sans-serif"],
+        // Highly readable body text
+        sans: ["var(--font-nunito)", "ui-sans-serif", "system-ui", "sans-serif"],
       },
       boxShadow: {
-        // Hard, blocky (zero-blur) pixel drop shadows
-        bouncy: "8px 8px 0px 0px #000000",
-        "bouncy-sm": "4px 4px 0px 0px #000000",
-        "bouncy-lg": "12px 12px 0px 0px #000000",
+        // shadow-bouncy: hard, unblurred drop shadow
+        bouncy: "6px 6px 0px 0px #000000",
+        // a pressed/hover variant for playful interactions
+        "bouncy-sm": "3px 3px 0px 0px #000000",
+        "bouncy-lg": "10px 10px 0px 0px #000000",
       },
       transitionTimingFunction: {
-        // Snappy (no overshoot) — the old bouncy spring is retired
-        bouncy: "cubic-bezier(0.2, 0, 0, 1)",
-        spring: "cubic-bezier(0.2, 0, 0, 1)",
+        // Overshooting spring for playful hovers
+        bouncy: "cubic-bezier(0.34, 1.56, 0.64, 1)",
+        // Snappier, more aggressive overshoot
+        spring: "cubic-bezier(0.68, -0.55, 0.265, 1.55)",
       },
       transitionDuration: {
-        bouncy: "120ms",
+        bouncy: "200ms",
       },
       keyframes: {
-        // Gentle vertical bob for arcade-style sprite decorations
+        // Gentle vertical bob for the "under construction" pill text
         "bounce-gentle": {
           "0%, 100%": { transform: "translateY(0)" },
           "50%": { transform: "translateY(-8px)" },
         },
       },
       animation: {
-        "bounce-gentle": "bounce-gentle 1.2s steps(4, end) infinite",
+        "bounce-gentle": "bounce-gentle 1.2s ease-in-out infinite",
       },
     },
   },

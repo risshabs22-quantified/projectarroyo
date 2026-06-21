@@ -1,22 +1,22 @@
 import type { Metadata, Viewport } from "next";
-import { Press_Start_2P, VT323 } from "next/font/google";
+import { Fredoka, Nunito } from "next/font/google";
 import { Navbar } from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import "./globals.css";
 
-// Chunky 8-bit arcade title font for headers (uppercased via globals.css).
-const pressStart = Press_Start_2P({
+// Chunky, bubbly headers. Swap to `Dela_Gothic_One` if you want it even heavier.
+const fredoka = Fredoka({
   subsets: ["latin"],
-  weight: "400",
-  variable: "--font-press-start",
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-fredoka",
   display: "swap",
 });
 
-// Readable terminal pixel font for body text.
-const vt323 = VT323({
+// Highly readable body text.
+const nunito = Nunito({
   subsets: ["latin"],
-  weight: "400",
-  variable: "--font-vt323",
+  weight: ["400", "600", "700", "800"],
+  variable: "--font-nunito",
   display: "swap",
 });
 
@@ -62,11 +62,11 @@ export const metadata: Metadata = {
   },
 };
 
-// Explicit mobile viewport + off-white theme color for the phone browser chrome.
+// Explicit mobile viewport + cream theme color for the phone browser chrome.
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#FFFFF0",
+  themeColor: "#FFF9E6",
 };
 
 export default function RootLayout({
@@ -75,7 +75,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${pressStart.variable} ${vt323.variable}`}>
+    <html lang="en" className={`${fredoka.variable} ${nunito.variable}`}>
       <body className="flex min-h-screen flex-col">
         <Navbar />
         <div className="flex-1">{children}</div>
