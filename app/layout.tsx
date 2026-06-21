@@ -42,6 +42,11 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "Project Arroyo" }],
   category: "Environmental Science",
+  icons: {
+    icon: "/logo.webp",
+    shortcut: "/logo.webp",
+    apple: "/logo.webp",
+  },
   openGraph: {
     type: "website",
     title: "The Arroyo Seco Project | Native Plant Mapping",

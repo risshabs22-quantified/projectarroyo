@@ -53,33 +53,60 @@ function PixelStar({
 export default function Footer() {
   return (
     <footer className="mt-16 border-t-4 border-ink bg-paper">
-      <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-center gap-4 px-6 py-10 sm:gap-6">
-        {/* Pixel-art star, gently bouncing */}
-        <PixelStar className="animate-bounce-gentle" />
+      <div className="mx-auto flex max-w-6xl flex-col items-center gap-5 px-6 py-10">
+        <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6">
+          {/* Pixel-art star, gently bouncing */}
+          <PixelStar className="animate-bounce-gentle" />
 
-        {/* Bouncing leaf (offset so it bobs out of sync with the rest) */}
-        <span
-          aria-hidden="true"
-          className="inline-block animate-bounce-gentle text-3xl [animation-delay:150ms]"
+          {/* Bouncing leaf (offset so it bobs out of sync with the rest) */}
+          <span
+            aria-hidden="true"
+            className="inline-block animate-bounce-gentle text-3xl [animation-delay:150ms]"
+          >
+            🌿
+          </span>
+
+          <p className="text-center font-heading text-xl font-bold text-ink sm:text-2xl">
+            Built for the Arroyo Seco Project 🌿
+          </p>
+
+          {/* Second bouncing leaf + star, offset the other way */}
+          <span
+            aria-hidden="true"
+            className="inline-block animate-bounce-gentle text-3xl [animation-delay:300ms]"
+          >
+            🌿
+          </span>
+          <PixelStar
+            color="#34D399"
+            className="animate-bounce-gentle [animation-delay:450ms]"
+          />
+        </div>
+
+        {/* Instagram link */}
+        <a
+          href="https://www.instagram.com/project.arroyo/"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Follow Project Arroyo on Instagram (@project.arroyo)"
+          className="inline-flex items-center gap-2 rounded-full border-4 border-ink bg-white px-5 py-2 font-heading text-lg font-bold text-ink shadow-bouncy ease-bouncy duration-bouncy hover:-translate-y-1 hover:bg-[#FBBF24] hover:shadow-[2px_2px_0px_0px_#000000]"
         >
-          🌿
-        </span>
-
-        <p className="text-center font-heading text-xl font-bold text-ink sm:text-2xl">
-          Built for the Arroyo Seco Project 🌿
-        </p>
-
-        {/* Second bouncing leaf + star, offset the other way */}
-        <span
-          aria-hidden="true"
-          className="inline-block animate-bounce-gentle text-3xl [animation-delay:300ms]"
-        >
-          🌿
-        </span>
-        <PixelStar
-          color="#34D399"
-          className="animate-bounce-gentle [animation-delay:450ms]"
-        />
+          <svg
+            viewBox="0 0 24 24"
+            className="h-5 w-5"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            aria-hidden="true"
+          >
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+          </svg>
+          @project.arroyo
+        </a>
       </div>
     </footer>
   );

@@ -41,9 +41,17 @@ export function Navbar() {
       <nav className="mx-auto flex max-w-6xl items-center justify-between gap-x-6 px-6 py-4">
         <Link
           href="/"
-          className="mr-2 font-heading text-2xl font-bold text-ink -rotate-1 transition-transform ease-bouncy duration-bouncy hover:scale-105"
+          className="mr-2 flex items-center gap-2 font-heading text-2xl font-bold text-ink transition-transform ease-bouncy duration-bouncy hover:scale-105"
         >
-          Arroyo Seco
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/logo.webp"
+            alt="Project Arroyo logo"
+            width={44}
+            height={44}
+            className="h-11 w-11 rounded-full border-2 border-ink object-cover"
+          />
+          <span className="-rotate-1">Arroyo Seco</span>
         </Link>
 
         {/* Desktop links — inline from md up. */}
