@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Fredoka, Nunito } from "next/font/google";
 import { Navbar } from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import BiomeBackground from "@/components/BiomeBackground";
 import "./globals.css";
 
 // Chunky, bubbly headers. Swap to `Dela_Gothic_One` if you want it even heavier.
@@ -77,6 +78,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${fredoka.variable} ${nunito.variable}`}>
       <body className="flex min-h-screen flex-col">
+        <BiomeBackground />
         <Navbar />
         <div className="flex-1">{children}</div>
         <Footer />
