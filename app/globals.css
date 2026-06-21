@@ -172,6 +172,61 @@
   100% { transform: translate(0, 0); }
 }
 
+@keyframes biome-slither {
+  0%, 100% { transform: translateY(0) scaleX(1); }
+  50% { transform: translateY(-3px) scaleX(0.93); }
+}
+@keyframes biome-jelly {
+  0%, 100% { transform: translateY(0) scaleY(1); }
+  50% { transform: translateY(-16px) scaleY(0.84); }
+}
+@keyframes biome-hop {
+  0%, 42%, 100% { transform: translateY(0); }
+  52% { transform: translateY(-20px); }
+  62% { transform: translateY(0); }
+}
+@keyframes biome-scuttle {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(26px); }
+}
+
+/* Bonk interaction — animals recoil + show a POW bruise when the cursor
+ * gets near. Knockback lives on its own layer so it composes with the
+ * drift/bob animations. */
+.biome-react {
+  display: inline-block;
+  line-height: 0;
+  transition: transform 0.18s cubic-bezier(0.2, 1.5, 0.5, 1);
+}
+.biome-react.is-hit {
+  transform: translate(var(--kx, 0), var(--ky, 0)) rotate(var(--kr, 0deg)) scale(0.84);
+}
+.biome-bruise {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  opacity: 0;
+  transform: scale(0);
+  pointer-events: none;
+}
+.biome-react.is-hit .biome-bruise {
+  animation: biome-pow 0.6s ease-out;
+}
+@keyframes biome-pow {
+  0% { opacity: 0; transform: scale(0.2) rotate(-25deg); }
+  30% { opacity: 1; transform: scale(1.25) rotate(0deg); }
+  70% { opacity: 1; transform: scale(1) rotate(8deg); }
+  100% { opacity: 0; transform: scale(1.1) rotate(0deg); }
+}
+
+/* Phones: drop the lower-priority density so it stays light + uncluttered. */
+@media (max-width: 640px) {
+  .biome-extra {
+    display: none !important;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .biome-bg * {
     animation: none !important;
