@@ -11,6 +11,10 @@ export default function AboutPage() {
         About Project Arroyo
       </BubblyHeader>
 
+      <span className="w-fit rounded-full border-2 border-ink bg-white px-3 py-1 text-sm font-bold text-ink shadow-bouncy">
+        Started June 2024
+      </span>
+
       {/* Wide mission / team card. */}
       <CartoonCard roomy className="flex w-full flex-col gap-5">
         <p className="text-lg leading-relaxed">

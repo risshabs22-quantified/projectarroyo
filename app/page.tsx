@@ -10,6 +10,9 @@ export default function Home() {
         <p className="text-xl font-bold text-ink/70">
           Native Plant Restoration Mapping
         </p>
+        <span className="w-fit rounded-full border-2 border-ink bg-white px-3 py-1 text-sm font-bold text-ink shadow-bouncy">
+          Started June 2024
+        </span>
       </header>
 
       {/* Hero map of the Arroyo Seco corridor with the study sites pinned. */}

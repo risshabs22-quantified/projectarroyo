@@ -41,12 +41,6 @@ const FIELD_ENTRIES: {
     lat: 34.125,
     lng: -118.172,
   },
-  {
-    site: "Site 6 — Upper Basin",
-    note: "Mixed natives and invasives; candidate area for targeted planting and monitoring.",
-    lat: 34.16,
-    lng: -118.169,
-  },
 ];
 
 export default function Fieldwork() {
